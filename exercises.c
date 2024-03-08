@@ -9,14 +9,44 @@ Ejercicio 1: Encuentra el Elemento Mayor
 Descripción: Escribe una función que tome un arreglo de enteros
 y su tamaño, y devuelva el valor más grande del arreglo.
 */
-int findMax(int arr[], int size) { return 0; }
+int findMax(int arr[], int size) { 
+  if(arr == NULL || size<=0) {
+    return 0;
+  }
+
+  int mayor = arr[0];
+  for(int i=0; i<size; i++) {
+    if(arr[i] > mayor) {
+      mayor = arr[i];
+    }
+  }
+
+  return mayor;
+  }
 
 /*
 Ejercicio 2: Invertir un Arreglo
 Descripción: Escribe una función que tome un arreglo y su tamaño, y luego
 invierta el orden de sus elementos.
 */
-void reverseArray(int arr[], int size) {}
+void reverseArray(int arr[], int size) {
+  if(arr == NULL || size<=0) {
+    return;
+  }
+
+  int * arrNuevo;
+  arrNuevo = malloc(size * sizeof(int));
+
+  int indice = 0;
+  for(int i=size-1; i >= 0; i--) {
+    arrNuevo[indice] = arr[i];
+    indice++;
+  }
+
+  for(int j = 0; j<size; j++) {
+    arr[j] = arrNuevo[j];
+  }
+}
 
 /*
 Ejercicio 3: Filtrar Números Pares
@@ -24,7 +54,26 @@ Descripción: Escribe una función que tome un arreglo de enteros
 y su tamaño, y luego devuelva un nuevo arreglo que contenga solo
 los números pares del arreglo original.
 */
-int *filterEvenNumbers(int arr[], int size, int *newSize) { return NULL; }
+int *filterEvenNumbers(int arr[], int size, int *newSize) { 
+  if(arr == NULL || size <= 0) {
+    return NULL;
+  }
+
+  int *nuevoArreglo;
+  nuevoArreglo = malloc(size * sizeof(int));
+
+  int indice = 0;
+  for(int i = 0; i<size; i++) {
+    if(arr[i] % 2 == 0) {
+      nuevoArreglo[indice] = arr[i];
+      indice++;
+    }
+  }
+
+  //no "indice + 1" por que se suma uno al final
+  *newSize = indice;
+  return nuevoArreglo; 
+  }
 
 /*
 Ejercicio 4: Fusión de dos Arreglos Ordenados
@@ -32,8 +81,34 @@ Descripción: Escribe una función que tome dos arreglos
 ordenados y sus tamaños, y luego fusione estos dos
 arreglos en un tercer arreglo también ordenado.
 */
-void mergeSortedArrays(int arr1[], int size1, int arr2[], int size2,
-                       int result[]) {}
+void mergeSortedArrays(int arr1[], int size1, int arr2[], int size2, int result[]) {
+//[43,44,45]
+//[1,2,3,4,5,6]
+
+if(arr1 == NULL || arr2 == NULL || size1 <= 0 || size2 <= 0) {
+  return;
+}
+
+int i = 0, j = 0, k = 0;
+
+ while (i < size1 && j < size2) {
+        if (arr1[i] <= arr2[j]) {
+            result[k++] = arr1[i++];
+        } else {
+            result[k++] = arr2[j++];
+        }
+    }
+
+    while (i < size1) {
+        result[k++] = arr1[i++];
+    }
+
+    // Copiar los elementos restantes de arr2, si los hay
+    while (j < size2) {
+        result[k++] = arr2[j++];
+    }
+
+}
 
 /*
 Ejercicio 5: Comprobación de Ordenación
@@ -41,7 +116,9 @@ Descripción: Escribe una función que tome un arreglo y su tamaño,
 y luego devuelva 1 si el arreglo está ordenado en orden ascendente,
   0 si no está ordenado, y -1 si está ordenado en orden descendente.
 */
-int checkSorted(int arr[], int size) { return -2; }
+int checkSorted(int arr[], int size) { 
+  return -2; 
+  }
 
 /*
 Ejercicio 6: Información de una Biblioteca
