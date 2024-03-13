@@ -31,6 +31,8 @@ Descripción: Escribe una función que tome un arreglo y su tamaño, y luego
 invierta el orden de sus elementos.
 */
 void reverseArray(int arr[], int size) {
+
+  /*
   if (arr == NULL || size <= 0) {
     return;
   }
@@ -46,6 +48,22 @@ void reverseArray(int arr[], int size) {
 
   for (int j = 0; j < size; j++) {
     arr[j] = arrNuevo[j];
+  }*/
+
+  if (arr == NULL || size <= 0) {
+    return;
+  }
+
+  int inicio = 0;
+  int fin = size - 1;
+
+  while (inicio < fin) {
+    int temp = arr[inicio];
+    arr[inicio] = arr[fin];
+    arr[fin] = temp;
+
+    inicio++;
+    fin--;
   }
 }
 
@@ -84,8 +102,6 @@ arreglos en un tercer arreglo también ordenado.
 */
 void mergeSortedArrays(int arr1[], int size1, int arr2[], int size2,
                        int result[]) {
-  //[43,44,45]
-  //[1,2,3,4,5,6]
 
   if (arr1 == NULL || arr2 == NULL || size1 <= 0 || size2 <= 0) {
     return;
@@ -101,42 +117,47 @@ void mergeSortedArrays(int arr1[], int size1, int arr2[], int size2,
     }
   }
 
+  //Se copian los elementos ya que pueden terminar de procesarse uno antes que otro
+
   while (i < size1) {
     result[k++] = arr1[i++];
   }
 
-  // Copiar los elementos restantes de arr2, si los hay
   while (j < size2) {
     result[k++] = arr2[j++];
   }
 }
 
-/*
-Ejercicio 5: Comprobación de Ordenación
-Descripción: Escribe una función que tome un arreglo y su tamaño,
-y luego devuelva 1 si el arreglo está ordenado en orden ascendente,
-  0 si no está ordenado, y -1 si está ordenado en orden descendente.
-*/
+  /*
+  Ejercicio 5: Comprobación de Ordenación
+  Descripción: Escribe una función que tome un arreglo y su tamaño,
+  y luego devuelva 1 si el arreglo está ordenado en orden ascendente,
+    0 si no está ordenado, y -1 si está ordenado en orden descendente.
+  */
 int checkSorted(int arr[], int size) {
   if (arr == NULL || size <= 0)
     return 0; // Manejo de casos especiales
 
-  int ascendant = 1;
-  int descendant = 1;
+  bool ascendant = true;
+  bool descendant = true;
 
   for (int i = 0; i < size - 1; i++) {
     if (arr[i] > arr[i + 1]) {
-      ascendant = 0;
+      ascendant = false;
     }
     if (arr[i] < arr[i + 1]) {
-      descendant = 0;
+      descendant = false;
     }
   }
 
-  if (ascendant)
-    return 1;
-  if (descendant)
-    return -1;
+  if (ascendant) {
+        return 1;
+  }
+
+  if (descendant) {
+        return -1;
+  }
+
 
   return 0;
 }
@@ -193,9 +214,10 @@ Nodo *crearListaEnlazada(int arr[], int size) {
 
   Nodo* cabeza = NULL;
   Nodo* actual = NULL;
+  Nodo* nuevoNodo = NULL;
 
   for (int i = 0; i < size; i++) {
-      Nodo* nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
+      nuevoNodo = (Nodo*)malloc(sizeof(Nodo));
       if (nuevoNodo == NULL) {
           return NULL;
       }
