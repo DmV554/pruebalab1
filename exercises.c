@@ -32,11 +32,11 @@ invierta el orden de sus elementos.
 */
 void reverseArray(int arr[], int size) {
 
-  /*
+
   if (arr == NULL || size <= 0) {
     return;
   }
-
+/*
   int *arrNuevo;
   arrNuevo = malloc(size * sizeof(int));
 
@@ -49,6 +49,9 @@ void reverseArray(int arr[], int size) {
   for (int j = 0; j < size; j++) {
     arr[j] = arrNuevo[j];
   }*/
+
+
+  /*
 
   if (arr == NULL || size <= 0) {
     return;
@@ -64,6 +67,13 @@ void reverseArray(int arr[], int size) {
 
     inicio++;
     fin--;
+  }*/   
+
+  int temp;
+  for(int i=0; i < size / 2; i++) {
+    temp = arr[i];
+    arr[i] = arr[size - i - 1];
+    arr[size - i - 1] = temp;
   }
 }
 
@@ -81,16 +91,19 @@ int *filterEvenNumbers(int arr[], int size, int *newSize) {
   int *nuevoArreglo;
   nuevoArreglo = malloc(size * sizeof(int));
 
-  int indice = 0;
+  *newSize = 0;
+
+  //int indice = 0;
   for (int i = 0; i < size; i++) {
     if (arr[i] % 2 == 0) {
-      nuevoArreglo[indice] = arr[i];
-      indice++;
+      nuevoArreglo[(*newSize)++] = arr[i];
+      //indice++;
+      //*newSize += 1;
     }
   }
 
   // no "indice + 1" por que se suma uno al final
-  *newSize = indice;
+  //*newSize = indice;
   return nuevoArreglo;
 }
 
@@ -111,13 +124,9 @@ void mergeSortedArrays(int arr1[], int size1, int arr2[], int size2,
 
   while (i < size1 && j < size2) {
     if (arr1[i] <= arr2[j]) {
-      result[k] = arr1[i];
-      i++;
-      k++;
+      result[k++] = arr1[i++];
     } else {
-      result[k] = arr2[j];
-      j++;
-      k++;
+      result[k++] = arr2[j++];
     }
   }
 
